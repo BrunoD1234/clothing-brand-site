@@ -2,48 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>VOID Apparel</title>
+<title>OBSCURA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  background: #0a0a0a;
+  margin: 0;
+  background: #050505;
   color: white;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-/* NAVBAR */
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 40px;
+/* GRAIN EFFECT */
+body::before {
+  content: "";
   position: fixed;
   width: 100%;
-  top: 0;
-  background: rgba(0,0,0,0.7);
+  height: 100%;
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* NAV */
+header {
+  position: fixed;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(0,0,0,0.3);
   backdrop-filter: blur(10px);
   z-index: 100;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  color: #aaa;
 }
 
 /* HERO */
@@ -52,34 +43,38 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('https://images.unsplash.com/photo-1520975922323-4a2c66c2b1c7') center/cover;
+  background: radial-gradient(circle at center, #111 0%, #000 80%);
   text-align: center;
 }
 
-.hero h2 {
-  font-size: 50px;
-  letter-spacing: 4px;
-  animation: fadeIn 2s ease-in-out;
+.hero h1 {
+  font-size: 60px;
+  letter-spacing: 6px;
+  animation: glitch 2s infinite;
 }
 
-.hero button {
+@keyframes glitch {
+  0% { text-shadow: 2px 2px red; }
+  50% { text-shadow: -2px -2px purple; }
+  100% { text-shadow: 2px 2px red; }
+}
+
+button {
   margin-top: 20px;
   padding: 12px 30px;
-  background: white;
-  color: black;
-  border: none;
+  background: black;
+  border: 1px solid white;
+  color: white;
   cursor: pointer;
-  font-weight: bold;
   transition: 0.3s;
 }
 
-.hero button:hover {
-  background: black;
-  color: white;
-  border: 1px solid white;
+button:hover {
+  background: white;
+  color: black;
 }
 
-/* SECTIONS */
+/* SECTION */
 .section {
   padding: 100px 40px;
   text-align: center;
@@ -90,71 +85,67 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  margin-top: 40px;
 }
 
 .product {
-  background: #111;
+  background: #0a0a0a;
   padding: 20px;
-  border-radius: 10px;
-  transition: 0.3s;
-  position: relative;
-  overflow: hidden;
+  transition: 0.4s;
 }
 
 .product:hover {
   transform: scale(1.05);
 }
 
-/* Image hover zoom */
 .product img {
   width: 100%;
-  border-radius: 10px;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .product:hover img {
   transform: scale(1.1);
 }
 
-/* Add to cart button */
-.add-btn {
-  margin-top: 10px;
-  padding: 8px 15px;
-  border: none;
-  background: white;
-  color: black;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.add-btn:hover {
-  background: black;
-  color: white;
-  border: 1px solid white;
-}
-
-/* CART */
-.cart {
+/* EYE */
+.eye {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  width: 40px;
+  height: 20px;
   background: white;
-  color: black;
-  padding: 15px;
-  border-radius: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0.2;
 }
 
-/* ANIMATION */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.pupil {
+  width: 10px;
+  height: 10px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  transition: 0.1s;
 }
+
+/* blink */
+@keyframes blink {
+  0%, 90%, 100% { height: 20px; }
+  95% { height: 2px; }
+}
+
+.eye {
+  animation: blink 5s infinite;
+}
+
+/* positions */
+.eye1 { top: 20%; left: 5%; }
+.eye2 { top: 60%; right: 5%; }
+.eye3 { bottom: 10%; left: 20%; }
 
 footer {
   padding: 40px;
-  text-align: center;
-  background: #000;
+  background: black;
 }
 </style>
 </head>
@@ -162,72 +153,61 @@ footer {
 <body>
 
 <header>
-  <h1>VOID</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#shop">Shop</a>
-    <a href="#about">About</a>
-  </nav>
+  <h2>OBSCURA</h2>
 </header>
 
-<section class="hero">
+<div class="hero">
   <div>
-    <h2>NEW DROP</h2>
-    <button onclick="scrollToShop()">SHOP NOW</button>
+    <h1>OBSCURA</h1>
+    <button onclick="scrollDown()">ENTER</button>
   </div>
-</section>
+</div>
 
-<section id="shop" class="section">
-  <h2>Featured Pieces</h2>
+<div class="section">
+  <h2>COLLECTION</h2>
 
   <div class="products">
     <div class="product">
       <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b">
-      <h3>Black Hoodie</h3>
-      <p>$60</p>
-      <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+      <h3>VOID HOODIE</h3>
     </div>
 
     <div class="product">
       <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
-      <h3>Oversized Tee</h3>
-      <p>$35</p>
-      <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38">
-      <h3>Cargo Pants</h3>
-      <p>$80</p>
-      <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+      <h3>SHADOW TEE</h3>
     </div>
   </div>
-</section>
-
-<section id="about" class="section">
-  <h2>About</h2>
-  <p>VOID is built on minimalism and modern streetwear culture.</p>
-</section>
-
-<div class="cart">
-  🛒 Cart: <span id="cart-count">0</span>
 </div>
 
+<!-- EYES -->
+<div class="eye eye1"><div class="pupil"></div></div>
+<div class="eye eye2"><div class="pupil"></div></div>
+<div class="eye eye3"><div class="pupil"></div></div>
+
 <footer>
-  <p>© 2026 VOID Apparel</p>
+  <p>© OBSCURA</p>
 </footer>
 
 <script>
-let count = 0;
-
-function addToCart() {
-  count++;
-  document.getElementById("cart-count").innerText = count;
+function scrollDown() {
+  window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
 }
 
-function scrollToShop() {
-  document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
-}
+/* EYE TRACKING */
+document.addEventListener("mousemove", (e) => {
+  document.querySelectorAll(".eye").forEach(eye => {
+    let pupil = eye.querySelector(".pupil");
+
+    let rect = eye.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+    let moveX = (x / rect.width - 0.5) * 10;
+    let moveY = (y / rect.height - 0.5) * 10;
+
+    pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
+});
 </script>
 
 </body>
